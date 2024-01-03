@@ -1,81 +1,45 @@
 ## Loan Approval Prediction Solution
 
 # Overview
+The Loan Approval Predictor is a solution that leverages machine learning models to predict whether a loan application is likely to be approved or not. This solution is based on a dataset containing various features related to loan applications, such as gender, age, income, region, loan amount, credit score, and more. The solution focuses on exploring and addressing potential biases in the model predictions using fairness metrics.
 
-This solution is designed to predict loan approval status based on various input features such as gender, age, income, region, loan amount, loan purpose, loan type, use type, credit type, loan limit, credit worthiness, credit score, property value, and more. The predictive model employed in this solution is a Random Forest Classifier, trained on historical data to learn patterns and make predictions regarding loan approval.
+# Data Exploration and Preprocessing
+Data Loading: The solution starts by loading the loan application dataset from the "Loan_Default.csv" file using the Pandas library.
 
-# Files Included
-# EDA and Model Training File (loan_prediction.ipynb):
+Data Cleaning and Feature Selection: Several columns deemed irrelevant or potentially causing bias are dropped from the dataset. Features like rate_of_interest, year, and various application details are excluded.
 
-The notebook contains exploratory data analysis (EDA) to understand the dataset and the preprocessing steps.
-It also includes the training of machine learning models, such as K-Nearest Neighbors, Gaussian Naive Bayes, Random Forest Classifier, and Gradient Boosting Classifier.
-Fairness metrics, including Demographic Parity and Equalized Odds, are computed and evaluated.
+Risk Categorization: A new column, 'risk_category', is created based on the 'Status' column, categorizing loans into 'Low Risk' or 'High Risk'.
 
-# Dash App File (app.py):
+Handling Missing Values: Missing values are handled by dropping rows with missing values and imputing others with mean or mode values.
 
-This is a Dash web application designed to interactively predict loan approval status.
-The app loads a pre-trained Random Forest Classifier model and uses it to make predictions based on user input.
-Users can input information such as gender, age, income, region, loan amount, and more to receive a loan approval prediction.
-Training Data Pickle File (training_data.pkl):
+Label Encoding: Categorical columns are label-encoded to convert them into numeric form for machine learning model compatibility.
 
-A serialized file containing the training and testing datasets, as well as the corresponding target variables. This file is used by the Dash app to load the necessary data for making predictions.
+Outlier Detection and Removal: Outliers are detected and removed using a simple z-score-based method.
 
-# Solution Details
-Exploratory Data Analysis (EDA)
-Data Cleaning and Feature Selection:
+Model Training
+The solution explores multiple machine learning models for loan approval prediction:
 
-Several columns are dropped based on their lack of relevance to the loan approval prediction task.
-A new column, 'risk_category,' is created by categorizing the 'Status' column into 'Low Risk' and 'High Risk.'
-Handling Missing Values:
+K-Nearest Neighbors (KNN)
+Gaussian Naive Bayes
+Random Forest Classifier
+Gradient Boosting Classifier
+The models are trained on a preprocessed dataset and evaluated using accuracy, confusion matrices, and classification reports.
 
-Missing values are visualized using a matrix, and then appropriate imputation strategies are applied.
-Numerical features are imputed with the mean, while categorical features are imputed with the mode.
-Outlier Detection and Removal:
-
-Outliers are detected using the Z-score method, and the corresponding rows are removed to enhance model performance.
-Data Encoding:
-
-Label encoding is applied to convert categorical features into numerical format for model training.
-Correlation Analysis:
-
-A correlation matrix heatmap is created to visualize the relationships between numerical features.
-
-# Model Training
-Machine Learning Models:
-
-K-Nearest Neighbors, Gaussian Naive Bayes, Random Forest Classifier, and Gradient Boosting Classifier are trained on the preprocessed dataset.
-Model Evaluation:
-
-Accuracy, confusion matrix, and classification reports are provided for each trained model.
 Fairness Evaluation
-Demographic Parity Difference:
+Fairness metrics are employed to assess potential bias in the model predictions. The solution uses two fairness metrics:
 
-Demographic parity difference is calculated for gender, region, and age groups to evaluate fairness.
-Equalized Odds Difference:
+Demographic Parity Difference: Examines differences in approval rates between different demographic groups (e.g., gender, region, age).
+Equalized Odds Difference: Evaluates disparities in true positive rates between different groups.
 
-Equalized odds difference is calculated, assuming 'age' as a continuous variable converted to binary.
+# Dash App for Loan Prediction
+The solution provides a Dash web application that allows users to input details for a loan application and receive a prediction on whether the loan is likely to be approved or not. Users can input information such as gender, age, income, region, loan amount, loan purpose, and more. The app uses a pre-trained Random Forest Classifier model to make predictions.
 
-# Dash Web Application
-Interactive Loan Approval Prediction:
-The Dash app allows users to input various details, and the pre-trained Random Forest Classifier makes loan approval predictions.
-Predictions are displayed on the app interface, indicating whether the loan is approved or not.
+Running the Solution
+EDA and Model Training: Execute the provided Python script for exploratory data analysis (EDA) and model training. Ensure the required libraries are installed (pip install dash pandas numpy matplotlib missingno scikit-learn seaborn fairlearn).
 
-# How to Use the Dash App
-Run the Dash App:
+Dash App: Run the Dash web application script, ensuring that the required libraries are installed (pip install dash dash-core-components dash-html-components pandas numpy scikit-learn).
 
-Execute the Dash app file (app.py) to start the web application.
-Access the application through a web browser.
-Input User Details:
+Interact with the App: Open the provided web application and interact with it by entering details for a loan application. The app will provide a prediction on loan approval.
 
-Enter relevant details such as gender, age, income, region, loan amount, loan purpose, and more.
-Click 'Predict':
-
-Click the 'Predict' button to trigger the loan approval prediction based on the provided information.
-View Prediction:
-
-The app will display the prediction result, indicating whether the loan is approved or not.
-
-# Important Note
-Ensure that you have the necessary Python libraries installed. 
-Replace the placeholder model (RandomForestClassifier()) in the Dash app with your actual pre-trained model before deploying it in a production environment.
-This comprehensive solution provides a detailed exploration of the loan approval prediction task, including data preprocessing, model training, fairness evaluation, and an interactive web application for real-time predictions.
+# Conclusion
+The Loan Approval Predictor solution combines data exploration, machine learning, and fairness evaluation to provide insights into loan approval predictions. It serves as a tool for understanding model behavior and identifying potential biases, contributing to responsible and fair AI practices in the financial domain.
