@@ -4,7 +4,7 @@
 The Loan Approval Predictor is a solution that leverages machine learning models to predict whether a loan application is likely to be approved or not. This solution is based on a dataset containing various features related to loan applications, such as gender, age, income, region, loan amount, credit score, and more. The solution focuses on exploring and addressing potential biases in the model predictions using fairness metrics.
 
 # Data Exploration and Preprocessing
-Data Loading: The solution starts by loading the loan application dataset from the "Loan_Default.csv" file using the Pandas library.
+# Data Loading: The solution starts by loading the loan application dataset from the "Loan_Default.csv" file using the Pandas library.
 
 Data Cleaning and Feature Selection: Several columns deemed irrelevant or potentially causing bias are dropped from the dataset. Features like rate_of_interest, year, and various application details are excluded.
 
